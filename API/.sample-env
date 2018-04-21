@@ -1,0 +1,10 @@
+SERVER_PORT = 
+
+DB_HOST = ""
+DB_USER = ""
+DB_PASSWORD = ""
+DB_NAME = ""
+timeoutBeforeReconnection = ""
+
+RSA_PUBLIC_KEY_PATH = ""
+RSA_PRIVATE_KEY_PATH = ""
