@@ -1,0 +1,225 @@
+{
+    "env": {
+        "node": true,
+        "es6": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 2018
+    },
+    "rules": {
+        "indent": [
+            "error",
+            4
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "double",
+            {
+                "allowTemplateLiterals": true
+            }
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "no-extra-parens": [
+            "error",
+            "all"
+        ],
+        "curly": [
+            "error",
+            "all"
+        ],
+        "eqeqeq": [
+            "error",
+            "always",
+            {
+                "null": "never"
+            }
+        ],
+        "no-multi-spaces": [
+            "error",
+            {
+                "ignoreEOLComments": true,
+                "exceptions": {
+                    "Property": true
+                }
+            }
+        ],
+        "array-bracket-spacing": [
+            "error",
+            "never"
+        ],
+        "block-spacing": [
+            "error",
+            "always"
+        ],
+        "brace-style": [
+            "error",
+            "1tbs"
+        ],
+        "capitalized-comments": [
+            "error",
+            "always"
+        ],
+        "comma-spacing": [
+            "error",
+            {
+                "before": false,
+                "after": true
+            }
+        ],
+        "func-call-spacing": [
+            "error",
+            "never"
+        ],
+        "key-spacing": [
+            "error",
+            {
+                "beforeColon": false,
+                "afterColon": true
+            }
+        ],
+        "keyword-spacing": [
+            "error",
+            {
+                "before": true,
+                "after": true
+            }
+        ],
+        "lines-between-class-members": [
+            "error",
+            "always"
+        ],
+        "max-len": [
+            "error",
+            {
+                "code": 120
+            }
+        ],
+        "no-lonely-if": [
+            "error"
+        ],
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max": 1,
+                "maxEOF": 1
+            }
+        ],
+        "no-trailing-spaces": [
+            "error",
+            {
+                "skipBlankLines": false,
+                "ignoreComments": true
+            }
+        ],
+        "no-whitespace-before-property": [
+            "error"
+        ],
+        "object-curly-spacing": [
+            "error",
+            "always"
+        ],
+        "operator-assignment": [
+            "error",
+            "always"
+        ],
+        "operator-linebreak": [
+            "error",
+            "before"
+        ],
+        "padded-blocks": [
+            "error",
+            "always"
+        ],
+        "quote-props": [
+            "error",
+            "always"
+        ],
+        "semi-spacing": [
+            "error",
+            {
+                "before": false,
+                "after": true
+            }
+        ],
+        "space-before-blocks": [
+            "error",
+            "always"
+        ],
+        "space-before-function-paren": [
+            "error",
+            {
+                "anonymous": "always",
+                "named": "never",
+                "asyncArrow": "always"
+            }
+        ],
+        "space-infix-ops": [
+            "error"
+        ],
+        "space-unary-ops": [
+            "error",
+            {
+                "words": true,
+                "nonwords": false
+            }
+        ],
+        "switch-colon-spacing": [
+            "error",
+            {
+                "after": true,
+                "before": false
+            }
+        ],
+        "arrow-body-style": [
+            "error",
+            "as-needed"
+        ],
+        "arrow-parens": [
+            "error",
+            "as-needed",
+            {
+                "requireForBlockBody": true
+            }
+        ],
+        "arrow-spacing": [
+            "error",
+            {
+                "before": true,
+                "after": true
+            }
+        ],
+        "no-duplicate-imports": [
+            "error"
+        ],
+        "no-useless-computed-key": [
+            "error"
+        ],
+        "no-var": [
+            "error"
+        ],
+        "prefer-arrow-callback": [
+            "error"
+        ],
+        "prefer-template": [
+            "error"
+        ],
+        "template-curly-spacing": [
+            "error",
+            "never"
+        ],
+        "no-unused-vars": [
+            "error",
+            {
+                "args": "none"
+            }
+        ]
+    }
+}

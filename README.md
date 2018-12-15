@@ -28,10 +28,14 @@ To generate RS256 RSA keys :
 
 * Run **db-migrate up:create** then **db-migrate up:insert** to initialize the database
 
-That's all ! now you can start the server with **sudo nodemon index.js** if you want auto restart when a file change or simply **node index.js**
+That's all ! now you can start the server with **npm start** 
 
 ## Tests
 
 All the tests are in the tests directory, just do **npm test** to run them.
 
 The tests are made with mocha and chai.
+
+## Documentation
+
+The documentation is made with swagger and can be find at "/api-documentation"

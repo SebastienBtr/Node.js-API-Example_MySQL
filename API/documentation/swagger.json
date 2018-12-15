@@ -1,0 +1,199 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Simple Node.js API with user authentication and sessions by using JWT and RS256 RSA keys",
+        "version": "1.0.0",
+        "title": "Node.js API example"
+    },
+    "tags": [
+        {
+            "name": "authentification",
+            "description": "Endpoints for user authentification"
+        },
+        {
+            "name": "users",
+            "description": "Endpoints to manipulate users"
+        }
+    ],
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    },
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "authentification"
+                ],
+                "summary": "Login a user",
+                "description": "",
+                "operationId": "login",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "credentials",
+                        "in": "body",
+                        "description": "The email and password of the user to login",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "email": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "idToken": {
+                                    "type": "string"
+                                },
+                                "expiresIn": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    },
+                    "412": {
+                        "description": "Invalid input, missing some parameters in path or body"
+                    }
+                }
+            }
+        },
+        "/users/create-user": {
+            "put": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Create a user",
+                "description": "",
+                "operationId": "createUser",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "The user data to create",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "email": {
+                                    "type": "string"
+                                },
+                                "firstname": {
+                                    "type": "string"
+                                },
+                                "lastname": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "insertId": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    },
+                    "412": {
+                        "description": "Invalid input, missing some parameters in path or body"
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Get a user by id",
+                "description": "",
+                "operationId": "getUserById",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The id of the user we want to get",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "integer"
+                                },
+                                "email": {
+                                    "type": "string"
+                                },
+                                "firstname": {
+                                    "type": "string"
+                                },
+                                "lastname": {
+                                    "type": "string"
+                                },
+                                "created_at": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, you need a token access to execute this request"
+                    },
+                    "412": {
+                        "description": "Invalid input, missing some parameters in path or body"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        }
+    }
+}

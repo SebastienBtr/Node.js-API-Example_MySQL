@@ -2,34 +2,42 @@
   "name": "api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "mocha"
+    "start": "nodemon server.js",
+    "test": "mocha --exit",
+    "eslint-check": "eslint ./ --ext js; exit 0",
+    "eslint-fix": "eslint ./ --ext js --fix; exit 0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SebastienBtr/sharebest.git"
+    "url": "https://github.com/SebastienBtr/Node.js-API-Example"
   },
   "author": "Sébastien Bouttier",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SebastienBtr/sharebest/issues"
+    "url": "https://github.com/SebastienBtr/Node.js-API-Example/issues"
   },
-  "homepage": "https://github.com/SebastienBtr/sharebest#readme",
+  "homepage": "https://github.com/SebastienBtr/Node.js-API-Example#readme",
   "dependencies": {
-    "bcrypt": "^2.0.1",
-    "body-parser": "^1.18.2",
-    "chai": "^4.1.2",
-    "chai-http": "^4.0.0",
-    "db-migrate": "^0.11.1",
+    "bcrypt": "^3.0.2",
+    "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "db-migrate": "^0.11.4",
     "db-migrate-mysql": "^1.1.10",
     "dotenv": "^5.0.1",
-    "express": "^4.16.3",
+    "express": "^4.16.4",
     "express-jwt": "^5.3.1",
-    "jsonwebtoken": "^8.2.1",
-    "mocha": "^5.1.0",
-    "mysql": "^2.15.0",
-    "nodemon": "^1.17.3",
-    "sinon": "^4.5.0"
+    "jsonwebtoken": "^8.4.0",
+    "mocha": "^5.2.0",
+    "mysql": "^2.16.0",
+    "swagger-ui-express": "^4.0.2",
+    "winston": "^2.*",
+    "winston-daily-rotate-file": "^3.5.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.10.0",
+    "nodemon": "^1.18.9"
   }
 }
