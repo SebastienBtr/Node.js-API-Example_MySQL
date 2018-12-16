@@ -1,8 +1,7 @@
-const db = require('../db.js');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const fs = require('fs');
-const usersSrv = require('./users.srv.js');
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const fs = require("fs");
+const usersSrv = require("./users.srv.js");
 
 module.exports.checkEmailPassword = (email, password, success, error) => {
 
@@ -11,22 +10,31 @@ module.exports.checkEmailPassword = (email, password, success, error) => {
         bcrypt.compare(password, user.password, (err, res) => {
 
             if (res) {
+
                 user.password = null;
                 success(user);
 
             } else {
-                error({ message: "ERRORS.BAD_CREDENTIALS", error: err, status: 401 });
+
+                error({ "message": "ERRORS.BAD_CREDENTIALS", "error": err, "status": 401 });
+
             }
+
         });
 
     }, (err) => {
+
         if (err.status === 204) {
-            error({ message: "ERRORS.BAD_CREDENTIALS", error: err, status: 401 });
+
+            error({ "message": "ERRORS.BAD_CREDENTIALS", "error": err, "status": 401 });
 
         } else {
+
             error(err);
+
         }
-    })
+
+    });
 
 };
 
@@ -37,15 +45,16 @@ module.exports.generateJWT = (userId, success, error) => {
     let id = userId.toString();
 
     let token = jwt.sign({}, RSA_PRIVATE_KEY, {
-        algorithm: 'RS256',
-        expiresIn: 120,
-        subject: id
+        "algorithm": "RS256",
+        "expiresIn": 120,
+        "subject": id
     });
 
     let tokenObj = {
-        idToken: token,
-        expiresIn: 120
-    }
+        "idToken": token,
+        "expiresIn": 120
+    };
 
     success(tokenObj);
+
 };

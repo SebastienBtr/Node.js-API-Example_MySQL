@@ -1,0 +1,3 @@
+migrations/*
+test/*
+node_modules/*
