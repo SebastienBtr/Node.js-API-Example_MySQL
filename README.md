@@ -1,16 +1,14 @@
-# NodeJs API with user authentification
+# RESTful API for Node.js using express and MySQL
 
 ## Description
 
-This project is an example of a NodeJs API with user authentication and sessions by using JWT and RS256 RSA keys.
+This project is an example of a RESTful API for Node.js using express and MySQL with user authentication and sessions by using JWT and RS256 RSA keys.
 
 Don't hesitate to give me feedbacks about my code.
 
 ## Installation
 
 * Run **npm install** into API
-
-* Install db-migrate globally : **npm install -g db-migrate**
 
 * Create a MySQL database
 
