@@ -1,5 +1,7 @@
-const db = require("../db.js");
 const bcrypt = require("bcrypt");
+
+const models = require( "../models");
+const User = models.user;
 
 module.exports.create = (user, success, error) => {
 
@@ -7,23 +9,23 @@ module.exports.create = (user, success, error) => {
 
         if (unique) {
 
-            let query = "INSERT INTO users (email, firstname, lastname, password) VALUES(?, ?, ?, ?)";
-
             bcrypt.hash(user.password, 10, (err, hash) => {
 
                 if (!err) {
 
-                    db.connection.query(query, [user.email, user.firstname, user.lastname, hash], (err, rows) => {
+                    User.create({
+                        "email": user.email,
+                        "fistname": user.firstname,
+                        "lastname": user.lastname,
+                        "password": hash
 
-                        if (!err) {
+                    }).then((result) => {
 
-                            success(rows);
+                        success({ "insertId": result.id });
 
-                        } else {
+                    }).catch((err) => {
 
-                            error({ "message": "ERRORS.DATABASE_ERROR", "error": err, "status": 500 });
-
-                        }
+                        error({ "message": "ERRORS.DATABASE_ERROR", "error": err, "status": 500 });
 
                     });
 
@@ -73,27 +75,21 @@ module.exports.uniqueEmail = (email, sucess, error) => {
 
 module.exports.findById = (id, success, error) => {
 
-    let query = "SELECT *, NULL AS password FROM users WHERE id = ?";
+    User.findByPk(id).then((user) => {
 
-    db.connection.query(query, [id], (err, rows) => {
+        if (user) {
 
-        if (!err) {
-
-            if (rows.length > 0) {
-
-                success(rows[0]);
-
-            } else {
-
-                error({ "message": "ERRORS.NO_USER_FIND", "status": 204 });
-
-            }
+            success(user);
 
         } else {
 
-            error({ "message": "ERRORS.DATABASE_ERROR", "error": err, "status": 500 });
+            error({ "message": "ERRORS.NO_USER_FIND", "status": 204 });
 
         }
+
+    }).catch((err) => {
+
+        error({ "message": "ERRORS.DATABASE_ERROR", "error": err, "status": 500 });
 
     });
 
@@ -101,27 +97,21 @@ module.exports.findById = (id, success, error) => {
 
 module.exports.findByEmail = (email, success, error) => {
 
-    let query = "SELECT * FROM users WHERE email = ?";
+    User.findOne({ "where": { "email": email } }).then((user) => {
 
-    db.connection.query(query, [email], (err, rows) => {
+        if (user) {
 
-        if (!err) {
-
-            if (rows.length > 0) {
-
-                success(rows[0]);
-
-            } else {
-
-                error({ "message": "ERRORS.NO_USER_FIND", "status": 204 });
-
-            }
+            success(user);
 
         } else {
 
-            error({ "message": "ERRORS.DATABASE_ERROR", "error": err, "status": 500 });
+            error({ "message": "ERRORS.NO_USER_FIND", "status": 204 });
 
         }
+
+    }).catch((err) => {
+
+        error({ "message": "ERRORS.DATABASE_ERROR", "error": err, "status": 500 });
 
     });
 
@@ -129,19 +119,13 @@ module.exports.findByEmail = (email, success, error) => {
 
 module.exports.deleteByEmail = (email, success, error) => {
 
-    let query = "DELETE FROM users WHERE email = ?";
+    User.destroy({ "where": { "email": email } }).then((result) => {
 
-    db.connection.query(query, [email], (err, rows) => {
+        success();
 
-        if (!err) {
+    }).catch((err) => {
 
-            success(rows);
-
-        } else {
-
-            error({ "message": "ERRORS.DATABASE_ERROR", "error": err, "status": 500 });
-
-        }
+        error({ "message": "ERRORS.DATABASE_ERROR", "error": err, "status": 500 });
 
     });
 

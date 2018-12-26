@@ -26,7 +26,11 @@ To generate RS256 RSA keys :
 
 * Create a .env file by copying the .sample-env file and complete the different fields
 
-* Run **db-migrate up:create** then **db-migrate up:insert** to initialize the database
+For database migrations the project user sequelize : http://docs.sequelizejs.com/manual/tutorial/migrations.html
+
+* Run **node_modules/.bin/sequelize db:migrate** to run migrations
+
+* Run **node_modules/.bin/sequelize db:seed:all** to run seeds
 
 That's all ! now you can start the server with **npm start** 
 
@@ -38,4 +42,4 @@ The tests are made with mocha and chai.
 
 ## Documentation
 
-The documentation is made with swagger and can be find at "/api-documentation"
+The documentation is made with swagger and can be find in the route "/api-documentation"

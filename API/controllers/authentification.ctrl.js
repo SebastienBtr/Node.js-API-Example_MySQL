@@ -1,7 +1,7 @@
 const funct = require("../utils/commonFunctions.js");
 const authSrv = require("../services/authentification.srv.js");
 
-exports.login = (req, res) => {
+module.exports.login = (req, res) => {
 
     if (funct.checkParams(res, req.body.email, req.body.password)) {
 

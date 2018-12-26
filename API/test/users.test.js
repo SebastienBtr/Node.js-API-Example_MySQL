@@ -37,7 +37,7 @@ describe("/PUT /users/create-user", () => {
     //Delete the user that we created
     after(() => {
 
-        usersSrv.deleteByEmail(notEmail, (rows) => {
+        usersSrv.deleteByEmail(notEmail, () => {
 
             winston.info("clean database");
 
@@ -139,7 +139,7 @@ describe("/GET users/:id", () => {
                 res.body.should.have.property("email");
                 res.body.should.have.property("firstname");
                 res.body.should.have.property("lastname");
-                res.body.should.have.property("created_at");
+                res.body.should.have.property("createdAt");
                 res.body.should.have.property("id").eql(id);
                 done();
 

@@ -1,7 +1,7 @@
 const funct = require("../utils/commonFunctions.js");
 const usersSrv = require("../services/users.srv.js");
 
-exports.createUser = (req, res) => {
+module.exports.createUser = (req, res) => {
 
     if (funct.checkParams(res, req.body.user, req.body.user.email, req.body.user.firstname,
         req.body.user.lastname, req.body.user.password)) {
@@ -22,7 +22,7 @@ exports.createUser = (req, res) => {
 
 };
 
-exports.getUserById = (req, res) => {
+module.exports.getUserById = (req, res) => {
 
     if (funct.checkParams(res, req.params.id)) {
 

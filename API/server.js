@@ -1,7 +1,5 @@
 const express = require("express");
 const app = express();
-const mysql = require("mysql");
-const db = require("./db.js");
 const bodyParser = require("body-parser");
 const expressJwt = require("express-jwt");
 const fs = require("fs");
@@ -19,11 +17,8 @@ winston.remove(winston.transports.Console);
 winston.add(require("winston-daily-rotate-file"), { "filename": "./logs/%DATE%.log", "datePattern": "DD-MM-YYYY" });
 winston.add(winston.transports.Console, { "timestamp": true, "level": "info" });
 
-//Check the directory for logs files
-checkDirectorySync("./logs");
-
 // Check if logs directory exist or not
-function checkDirectorySync(directory) {
+const checkDirectorySync = (directory) => {
 
     try {
 
@@ -35,7 +30,10 @@ function checkDirectorySync(directory) {
 
     }
 
-}
+};
+
+//Check the directory for logs files
+checkDirectorySync("./logs");
 
 // Add headers
 app.use((req, res, next) => {
@@ -58,48 +56,6 @@ app.use((req, res, next) => {
 
 });
 
-function dbConnection() {
-
-    const objConn = mysql.createConnection({
-        "host": process.env.DB_HOST,
-        "user": process.env.DB_USER,
-        "password": process.env.DB_PASSWORD,
-        "database": process.env.DB_NAME
-    });
-
-    objConn.connect((err) => {
-
-        if (err) {
-
-            winston.error("error when connecting to db:", err.code);
-            // We introduce a delay before attempting to reconnect
-            setTimeout(dbConnection, process.env.timeoutBeforeReconnection);
-
-        } else {
-
-            db.connection = objConn;
-            winston.info("Connected to db !");
-
-        }
-
-    });
-
-    objConn.on("error", (err) => {
-
-        if (err.code === "PROTOCOL_CONNECTION_LOST") { // Connection to the MySQL server is usually lost
-
-            dbConnection();
-
-        } else {
-
-            throw err;
-
-        }
-
-    });
-
-}
-
 // Configure app to use bodyParser()
 // This will let us get the data from a POST
 app.use(bodyParser.urlencoded({ "extended": true, "limit": "100mb" }));
@@ -116,10 +72,9 @@ app.use(expressJwt({ "secret": RSA_PUBLIC_KEY }).unless({ "path": ["/auth/login"
 // Register our routes
 app.use(routes);
 
-dbConnection();
-
 const port = process.env.SERVER_PORT;
 
+// Start the server
 app.listen(port, () => {
 
     winston.info(`Server is running on port ${port}`);
